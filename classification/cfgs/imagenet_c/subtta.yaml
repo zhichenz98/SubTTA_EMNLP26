@@ -1,0 +1,44 @@
+CORRUPTION:
+  DATASET: imagenet_c
+  SEVERITY:
+    - 5
+  TYPE:
+    - gaussian_noise
+    - shot_noise
+    - impulse_noise
+    - defocus_blur
+    - glass_blur
+    - motion_blur
+    - zoom_blur
+    - snow
+    - frost
+    - fog
+    - brightness
+    - contrast
+    - elastic_transform
+    - pixelate
+    - jpeg_compression
+MODEL:
+  ADAPTATION: subtta
+  ARCH: ViT-B-16
+  WEIGHTS: openai
+  USE_CLIP: True
+  EPISODIC: False
+OPTIM:
+  LR: 5e-4
+  METHOD: AdamW # AdamW 5e-4 Vit-B-16, 32
+  STEPS: 1
+  BETA: 0.9
+  WD: 0.01
+TEST:
+  BATCH_SIZE: 64
+SUBTTA:
+  SUBSPACE_RANK: 256
+  REMOVE_FIRST_PC: True
+  COV_MOMENTUM: 0.5
+  LOSS_TYPE: "mint"
+  ENT_SCALE: 3.0
+CLIP:
+  PRECISION: "fp32"
+  FREEZE_TEXT_ENCODER: True
+  PROMPT_TEMPLATE: ["a photo of a {}."]
